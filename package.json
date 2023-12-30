@@ -6,15 +6,32 @@
   "engines": {
     "vscode": "^1.85.0"
   },
+  
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "chatpilot.greetingName": {
+          "type": "string",
+          "default": ""
+        },
+        "chatpilot.showWelcomeCheckbox": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+  },
     "commands": [{
-      "command": "chatpilot.helloWorld",
-      "title": "Hello World"
+      "command": "extension.showComment",
+      "title": "test title"
     }]
   },
   "scripts": {
