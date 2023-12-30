@@ -13,7 +13,7 @@ const CONFIG_KEY_CHECKBOX = 'chatpilot.showWelcomeCheckbox';
  */
 function activate(context) {
 	console.log("activate")
-    updateCommentSymbol(); // Appel initial pour le fichier actif au démarrage de l'extension
+    updateCommentSymbol(context); // Appel initial pour le fichier actif au démarrage de l'extension
 
     let userName = vscode.workspace.getConfiguration().get(CONFIG_KEY_NAME, '');
     let showWelcomeCheckbox = vscode.workspace.getConfiguration().get(CONFIG_KEY_CHECKBOX, true);
@@ -72,17 +72,17 @@ function updateCommentSymbol(context) {
         // Ajouter des décorations pour chaque ligne avec un bouton
         commentLines.forEach((lineInfo) => {
             let lineNumber = lineInfo.lineNumber;
-            // let line = lineInfo.line;
+            let line = lineInfo.line;
             let decoration = createDecoration(lineNumber);
             decorations.push(decoration)
 
             // Ajouter un gestionnaire d'événements pour le clic sur la décoration
-            // decoration.command = {
-            //     command: 'extension.showComment',
-            //     title: 'Afficher le commentaire',
-            //     arguments: [line]
-            // };
-            // context.subscriptions.push(decoration.command);
+            decoration.command = {
+                command: 'extension.showComment',
+                title: 'Afficher le commentaire',
+                arguments: [line]
+            };
+            context.subscriptions.push(decoration.command);
         });
 		activeTextEditor.setDecorations(decorationType, decorations);
     }
