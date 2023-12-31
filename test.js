@@ -21,6 +21,14 @@ function activate(context) {
 
                 // Mettre à jour le contenu initial
                 updatePanelContent();
+
+                // Gérer la fermeture du panel
+                panel.onDidDispose(() => {
+                    panel = undefined;
+                });
+            } else {
+                // Si le panel est déjà ouvert, le focaliser
+                panel.reveal();
             }
         })
     );
@@ -57,7 +65,7 @@ function getWebviewContent(content) {
         </html>`;
 }
 
-exports.activate = activate;
+module.exports.activate = activate;
 
 // this method is called when your extension is deactivated
 function deactivate() {
@@ -66,4 +74,4 @@ function deactivate() {
     }
 }
 
-exports.deactivate = deactivate;
+module.exports.deactivate = deactivate;
