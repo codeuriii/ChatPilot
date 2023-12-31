@@ -138,7 +138,7 @@ function getCommentSymbol(languageId) {
 
 // Fonction pour récupérer le dictionnaire à partir du fichier JSON
 function getLangageCommentaires() {
-    const rawdata = fs.readFileSync('langages.json');
+    const rawdata = fs.readFileSync('languages.json');
     const data = JSON.parse(rawdata);
     return data.langages;
   }
