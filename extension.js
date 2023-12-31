@@ -101,7 +101,7 @@ function getCommentOnlyLines(document, commentSymbol) {
 
 function createDecoration(lineNumber) {
     let range = new vscode.Range(lineNumber - 1, 0, lineNumber - 1, 0);
-    let decoration = { range: range, renderOptions: { after: { contentText: '🟢', color: 'green' } } };
+    let decoration = { range: range, renderOptions: { after: { contentText: 'aa', color: 'green' } } };
     return decoration;
 }
 
