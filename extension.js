@@ -6,8 +6,16 @@ const fs = require('fs');
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 
+// Fonction pour récupérer le dictionnaire à partir du fichier JSON
+function getLangageCommentaires() {
+    const rawdata = fs.readFileSync('languages.json');
+    const data = JSON.parse(rawdata);
+    return data.langages;
+}
+
 const CONFIG_KEY_NAME = 'chatpilot.greetingName';
 const CONFIG_KEY_CHECKBOX = 'chatpilot.showWelcomeCheckbox';
+const langages = getLangageCommentaires()
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -131,17 +139,12 @@ function showWelcomeMessage(userName) {
 }
 
 function getCommentSymbol(languageId) {
-	const langages = getLangageCommentaires()
+	
     return langages[languageId]
     
 }
 
-// Fonction pour récupérer le dictionnaire à partir du fichier JSON
-function getLangageCommentaires() {
-    const rawdata = fs.readFileSync('languages.json');
-    const data = JSON.parse(rawdata);
-    return data.langages;
-  }
+
 
 function deactivate() {}
 
