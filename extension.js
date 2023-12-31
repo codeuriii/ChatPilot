@@ -1,16 +1,61 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-const fs = require('fs');
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 
 // Fonction pour récupérer le dictionnaire à partir du fichier JSON
 function getLangageCommentaires() {
-    const rawdata = fs.readFileSync('languages.json');
-    const data = JSON.parse(rawdata);
-    return data.langages;
+    return {
+        "python": "#",
+        "javascript": "//",
+        "java": "//",
+        "c": "//",
+        "c++": "//",
+        "c#": "//",
+        "swift": "//",
+        "typescript": "//",
+        "php": "//",
+        "ruby": "#",
+        "html": "<!--",
+        "css": "/*",
+        "go": "//",
+        "rust": "//",
+        "kotlin": "//",
+        "dart": "//",
+        "scala": "//",
+        "perl": "#",
+        "lua": "--",
+        "r": "#",
+        "shell": "#",
+        "matlab": "%",
+        "objective-c": "//",
+        "groovy": "//",
+        "haskell": "--",
+        "vb": "'",
+        "fortran": "!",
+        "cobol": "*",
+        "ada": "--",
+        "verilog": "//",
+        "sql": "--",
+        "assembly": "//",
+        "powershell": "#",
+        "typescript": "//",
+        "f#": "//",
+        "elixir": "#",
+        "erlang": "%",
+        "ocaml": "//",
+        "racket": ";",
+        "lisp": ";;",
+        "prolog": "%",
+        "bash": "#",
+        "shell": "#",
+        "dart": "//",
+        "julia": "#",
+        "smalltalk": "\"",
+        "scheme": ";;"
+      };
 }
 
 const CONFIG_KEY_NAME = 'chatpilot.greetingName';
