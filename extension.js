@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
+const fs = require('fs');
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -130,11 +131,17 @@ function showWelcomeMessage(userName) {
 }
 
 function getCommentSymbol(languageId) {
-	
-    if (languageId == "python") {
-		return '#'
-	} else return ""
+	const langages = getLangageCommentaires()
+    return langages[languageId]
+    
 }
+
+// Fonction pour récupérer le dictionnaire à partir du fichier JSON
+function getLangageCommentaires() {
+    const rawdata = fs.readFileSync('langages.json');
+    const data = JSON.parse(rawdata);
+    return data.langages;
+  }
 
 function deactivate() {}
 
