@@ -77,12 +77,12 @@ function updateCommentSymbol(context) {
             decorations.push(decoration)
 
             // Ajouter un gestionnaire d'événements pour le clic sur la décoration
-            decoration.command = {
+            let command = {
                 command: 'extension.showComment',
                 title: 'Afficher le commentaire',
                 arguments: [line]
             };
-            context.subscriptions.push(decoration.command);
+            context.subscriptions.push(command);
         });
 		activeTextEditor.setDecorations(decorationType, decorations);
     }
