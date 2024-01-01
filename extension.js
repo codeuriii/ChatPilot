@@ -139,6 +139,7 @@ function updateCommentSymbol(context) {
             context.subscriptions.push(command);
         });
 		activeTextEditor.setDecorations(decorationType, decorations);
+        showWelcomeMessage("set ok")
     }
 }
 
