@@ -1,7 +1,7 @@
 
 const OpenAI = require("openai");
 
-const apiKey = 'mdr';
+const apiKey = 'nope';
 const openai = new OpenAI({apiKey: apiKey});
 
 async function main() {
