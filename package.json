@@ -15,6 +15,14 @@
   ],
   "main": "./extension.js",
   "contributes": {
+    "menus": {
+      "editor/title": [
+        {
+          "command": "extension.showComment",
+          "group": "navigation"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "properties": {
