@@ -1,59 +1,22 @@
-const vscode = require('vscode');
+const axios = require('axios');
 
-function activate(context) {
-    context.subscriptions.push(
-        vscode.commands.registerCommand('extension.showGreetingPopup', (lineNumber, lineContent) => {
-            const greetingMessage = `Salut ! Contenu de la ligne ${lineNumber}: ${lineContent}`;
-            
-            vscode.window.showInformationMessage(greetingMessage, 'Log dans la console').then((selected) => {
-                if (selected === 'Log dans la console') {
-                    console.log(greetingMessage);
-                }
-            });
-        })
-    );
+const apiKey = 'VOTRE_CLE_API'; // Remplacez par votre clé d'API OpenAI
+const endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions'; // L'URL de l'API Codex
 
-    let disposable = vscode.commands.registerCommand('extension.showContextMenu', (editor) => {
-        const lineNumber = editor.selection.start.line + 1;
-        const lineContent = editor.document.lineAt(editor.selection.start.line).text;
+const codeToComplete = 'Votre code ici...'; // Le code que vous souhaitez compléter
 
-        vscode.window.showInformationMessage(
-            'Cliquez pour afficher le salut',
-            { modal: false },
-            'Salut'
-        ).then((selection) => {
-            if (selection === 'Salut') {
-                vscode.commands.executeCommand('extension.showGreetingPopup', lineNumber, lineContent);
-            }
-        });
-    });
-
-    vscode.window.onDidChangeTextEditorSelection((event) => {
-        if (event.selections.length === 1) {
-            const editor = vscode.window.activeTextEditor;
-            contextMenuDisposable.dispose();
-            contextMenuDisposable = vscode.commands.registerCommand('extension.showContextMenu', () => {
-                disposable.dispose();
-                contextMenuDisposable.dispose();
-                vscode.commands.executeCommand('extension.showContextMenu', editor);
-            });
-            context.subscriptions.push(contextMenuDisposable);
-        }
-    });
-
-    let contextMenuDisposable = vscode.commands.registerCommand('extension.showContextMenu', () => {
-        const editor = vscode.window.activeTextEditor;
-        disposable.dispose();
-        contextMenuDisposable.dispose();
-        vscode.commands.executeCommand('extension.showContextMenu', editor);
-    });
-
-    context.subscriptions.push(disposable, contextMenuDisposable);
-}
-
-function deactivate() {}
-
-module.exports = {
-    activate,
-    deactivate
-}
+axios.post(endpoint, {
+  prompt: codeToComplete,
+  max_tokens: 100, // Paramètre facultatif pour contrôler la longueur de la sortie
+}, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`,
+  },
+})
+  .then(response => {
+    console.log(response.data.choices[0].text); // Affiche la réponse de l'API
+  })
+  .catch(error => {
+    console.error('Erreur lors de la requête à l\'API OpenAI:', error);
+  });

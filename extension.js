@@ -62,10 +62,8 @@ const CONFIG_KEY_NAME = 'chatpilot.greetingName';
 const CONFIG_KEY_CHECKBOX = 'chatpilot.showWelcomeCheckbox';
 const langages = getLangageCommentaires()
 
-/**
- * @param {vscode.ExtensionContext} context
- */
-function activate(context) {
+
+function activate() {
 	console.log("activate")
 
     let userName = vscode.workspace.getConfiguration().get(CONFIG_KEY_NAME, '');
