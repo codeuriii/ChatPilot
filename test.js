@@ -1,22 +1,17 @@
-const axios = require('axios');
 
-const apiKey = 'VOTRE_CLE_API'; // Remplacez par votre clé d'API OpenAI
-const endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions'; // L'URL de l'API Codex
+const OpenAI = require("openai");
 
-const codeToComplete = 'Votre code ici...'; // Le code que vous souhaitez compléter
+const apiKey = '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';
+const openai = new OpenAI({apiKey: apiKey});
 
-axios.post(endpoint, {
-  prompt: codeToComplete,
-  max_tokens: 100, // Paramètre facultatif pour contrôler la longueur de la sortie
-}, {
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`,
-  },
-})
-  .then(response => {
-    console.log(response.data.choices[0].text); // Affiche la réponse de l'API
-  })
-  .catch(error => {
-    console.error('Erreur lors de la requête à l\'API OpenAI:', error);
+async function main() {
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: "You are a helpful assistant." }],
+    model: "gpt-3.5-turbo",
+    
   });
+
+  console.log(completion.choices[0]);
+}
+
+main();
